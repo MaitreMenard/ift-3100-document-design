@@ -11,11 +11,11 @@
 % Historique des versions
 %
 % 2011/01/14 - version 1.1h
-% Correction du répertoire de figures: répertoire fig pour toutes figures.
-% Ne pas spécifier les extensions, laisser LaTeX choisir le format approprié.
+% Correction du rï¿½pertoire de figures: rï¿½pertoire fig pour toutes figures.
+% Ne pas spï¿½cifier les extensions, laisser LaTeX choisir le format appropriï¿½.
 % Ajout d'information sur l'encodage des fichier pour TeXshop (Mac).
-% Mise-à-jour du rapport exemple en conséquence.
-% Formatage plus léger des commentaires de la classe et des exemples
+% Mise-ï¿½-jour du rapport exemple en consï¿½quence.
+% Formatage plus lï¿½ger des commentaires de la classe et des exemples
 %
 % 2008/03/28 - version 1.1g
 % Repositionnement de "\addcontentsline" pour assurer un hyperlien correct (3 fois)
@@ -290,3 +290,5 @@
    \setcounter{page}{1}%
    \pagenumbering{arabic}%
 }
+
+\renewcommand*\thesection{\arabic{section}} % Suppression de la dÃ©pendance des chapitres sur les sections
