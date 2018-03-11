@@ -252,36 +252,36 @@
 }
 
 % Generation de la page d'historique des versions ("Document Change Record")
-\AtBeginDocument{%
-   \thispagestyle{empty}%
-   \setcounter{page}{0}%
-   \noindent%
-   \begin{tabularx}{\textwidth}%
-      {|c|l|>{\raggedright\arraybackslash}X|}
-      \hline\hline
-      \multicolumn{3}{|c|}{\large\rule[-2.25ex]{0ex}{6ex}%
-                           \textsf{Historique des versions}}
-      \\\hline
-      \multicolumn{1}{|c|}{\emph{version}}
-      & \multicolumn{1}{c|}{\emph{date}}
-      & \multicolumn{1}{c|}{\emph{description}}
-      \\\hline
-      \theHistoriqueVersions\hline
-   \end{tabularx}\par
-   \clearpage
-}
+% \AtBeginDocument{%
+%   \thispagestyle{empty}%
+   %\setcounter{page}{0}%
+   %\noindent%
+   %\begin{tabularx}{\textwidth}%
+    %  {|c|l|>{\raggedright\arraybackslash}X|}
+    %  \hline\hline
+    %  \multicolumn{3}{|c|}{\large\rule[-2.25ex]{0ex}{6ex}%
+    %                       \textsf{Historique des versions}}
+    %  \\\hline
+    %  \multicolumn{1}{|c|}{\emph{version}}
+    %  & \multicolumn{1}{c|}{\emph{date}}
+    %  & \multicolumn{1}{c|}{\emph{description}}
+    %  \\\hline
+    %  \theHistoriqueVersions\hline
+   %\end{tabularx}\par
+   %\clearpage
+%}
 
 % Generation de la table des matieres, de la liste des figures, de la liste des tableaux
 \AtBeginDocument{%
    \tableofcontents
-   \ifthenelse{\boolean{InsererListeDesFigures}}%
-              {\clearpage%
-               \listoffigures%
-               \addcontentsline{toc}{chapter}{\listfigurename}}{}
-   \ifthenelse{\boolean{InsererListeDesTableaux}}%
-              {\clearpage%
-               \listoftables%
-               \addcontentsline{toc}{chapter}{\listtablename}}{}
+ %  \ifthenelse{\boolean{InsererListeDesFigures}}%
+%              {\clearpage%
+%               \listoffigures%
+%               \addcontentsline{toc}{chapter}{\listfigurename}}{}
+%   \ifthenelse{\boolean{InsererListeDesTableaux}}%
+%              {\clearpage%
+%               \listoftables%
+ %              \addcontentsline{toc}{chapter}{\listtablename}}{}
 }
 
 % Reinitialisation du compteur "page" (valeur et style)
@@ -291,4 +291,4 @@
    \pagenumbering{arabic}%
 }
 
-\renewcommand*\thesection{\arabic{section}} % Suppression de la dépendance des chapitres sur les sections
+\renewcommand*\thesection{\arabic{section}} % Suppres
