@@ -15,7 +15,8 @@
 \subsection{Graphe de scène}
 \subsection{Transformations interactives}
 \subsection{Historique des transformations}
-TODO
+\paragraph{} L'historique de transformation permet d'annuler et de récupérer une action provenant de l'utilisateur. Pour l'application, il est possible d'avoir l'historique du déplacement, de la rotation, de l'échelle et de la couleur pour chaque objet avec les touches \texttt{Ctrl+Z} et \texttt{Ctrl+Y}.
+\paragraph{} L'état d'un objet \texttt{GameObject} est sauvegardé dans une classe \texttt{Command} à chacunes de ces actions. Le nombre de sauvegarde de commande est limité à 500. Cette commande est gérée par la classe \texttt{CommandHandler} qui s'occupe de sauvegarder les états courants (\texttt{CommandHandler::add()}), d'appliquer les changements d'état (\texttt{CommandHandler::undo()/redo()}) et d'ordonner les commandes dans deux \texttt{std::stack} dont une pour récupérer les commandes et une autre pour les annuler. Cette classe appartient à la classe \texttt{Scene} qui appelle la méthode de sauvegarde d'état à chaque fonction de modification d'un \texttt{GameObject}. Elle offre aussi les méthodes \texttt{Scene::undo()} et \texttt{Scene::redo()} pour que les événements puissent contrôler l'historique des transformations.
 
 \section{Géométrie}
 \subsection{Boîte de délimitation}
