@@ -30,7 +30,21 @@ L'algorithme de capture d'écran est le suivant:
 \end{figure}
 
 \subsubsection{Sélecteur de couleur}
+\label{ss:selecteur_de_couleur}
+L'inspecteur offre deux sélecteurs de couleurs affichant les valeurs des composantes de couleur de l'objet sélectionné et permettant de les modifier.
+Chaque composante de couleur est encodée sur 8 bits, ce qui signifie que les sélecteurs acceptent des entiers entre 0 et 255.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/couleur.PNG}
+	\caption{Sélecteurs de couleur}
+	\label{fig:color_picker}
+\end{figure}
+Lorsque l'utilisateur entre une valeur dans un des champs, on récupère chacune des composantes et on applique cette couleurs à chaque vertex de l'objet sélectionné.
+
 \subsubsection{Espace de couleur}
+Un des sélecteurs de couleur de l'inspecteur permet de travailler en espace RGBA alors que l'autre permet de travailler en espace HSBA (voir la figure \ref{fig:color_picker}).
+Lorsque la valeur d'une composante est modifiée dans un espace de couleur, l'autre sélecteur est mis à jour afin d'afficher les valeurs correspondantes.
+
 
 \subsection{Dessin vectoriel}
 \subsubsection{Primitives vectorielles}
