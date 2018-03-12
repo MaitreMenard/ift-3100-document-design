@@ -1,6 +1,7 @@
 \section{Compilation}
 \label{s:compilation}
-\paragraph{} Le projet est développé sur\textit{ Visual Studio} et utilise le compilateur \textit{Common Tools for Visual C++ 2015}. Toutes les manipulations suivantes sont nécessaire pour compiler le projet : \\
+Le projet est développé sur\textit{ Visual Studio} et utilise le compilateur \textit{Common Tools for Visual C++ 2015}.
+Toutes les manipulations suivantes sont nécessaire pour compiler le projet : \\
 \newline 
 \textbf{Installation des Dépendances} \\
 Il est nécessaire d'installer \textit{openFramworks} et les add-ons suivants :
@@ -9,10 +10,13 @@ Il est nécessaire d'installer \textit{openFramworks} et les add-ons suivants :
 \item ofxInputField
 \item ofxAssimpModelLoader \\
 \end{itemize}
+
+\textit{ofxGui} et \textit{ofxAssimpModelLoader} viennent par défaut avec openFrameworks. Pour installer \textit{ofxInputField}, allez dans le dossiers \textit{/addons} du dossier d'installation d'openFrameworks puis clonez le dépôt Git suivant: \url{https://github.com/fx-lange/ofxInputField}.\\
+
 \textbf{Procédure de compilation}
 \begin{itemize}
-\item Cloner le dépôt dans le dossier /apps/myApps
+\item Cloner notre dépôt de code source dans le dossier \textit{/apps/myApps} du dossier d'installation d'openFrameworks
 \item Pour compiler la solution \textit{Common Tools for Visual C++ 2015} est requis
 \item Installer \textit{openFrameworks plugin} depuis le gestionnaire d'extension de Visual Studio 
-\item Ouvrir le fichier projet (\textit{harmony.vcxproj}) depuis \textit{Visual Studio} et compiler la solution
+\item Ouvrir le fichier projet (\textit{harmony.sln}) depuis \textit{Visual Studio} et compiler la solution
 \end{itemize}
