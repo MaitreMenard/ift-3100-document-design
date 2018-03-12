@@ -48,23 +48,99 @@ Lorsque la valeur d'une composante est modifiée dans un espace de couleur, l'au
 
 \subsection{Dessin vectoriel}
 \subsubsection{Primitives vectorielles}
+Les primitives vectorielles offertes par cette application sont : une ligne, un triangle, un rectangle, un pentagone et un cercle.
+Sur la figure suivante, on peut voir tous les objets qu'il est possible de créer dans l'application, incluant les primitives vectorielles.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/shapes.PNG}
+	\caption{Formes 2D}
+	\label{fig:primitives2D}
+\end{figure}
+
 \subsubsection{Forme vectorielle}
+Les formes vectorielles offertes par cette application sont : une étoile et une flèche.
+Sur la figure suivante, on peut voir tous les objets qu'il est possible de créer dans l'application, incluant les formes vectorielles.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/shapes.PNG}
+	\caption{Formes 2D}
+	\label{fig:formes2D}
+\end{figure}
+
 \subsubsection{Interface}
+Nous avons décrit en grande majorité le fonctionnement de l’interface utilisateur et de ses éléments dans la section \ref{s:interactivité}.
+Nous avons trois éléments d'interface graphique : l’inspecteur (pour modifier la position, la rotation, l’échelle de grandeur, la couleur et le parent des objets), le graphe de scène (voir tous les objets existant dans la scène ainsi que l’objet sélectionné) et l’interface de texture (offerte pour les objets 2D seulement, permettant de changer leur texture).
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/principale.PNG}
+	\caption{Interface graphique}
+	\label{fig:ui}
+\end{figure}
 
 \subsection{Transformation}
 \subsubsection{Graphe de scène}
+Le graphe de scène est une hiérarchie qui permet d’appliquer la transformation d’un parent sur ses objets enfants. On peut sélectionner un objet sur lequel on veut appliquer une transformation et il permet également de voir tous les éléments existant dans la scène. Pour plus d’information, voir \ref{fig:ui}.
+
 \subsubsection{Transformations interactives}
+L’interface utilisateur (le panneau Inspecteur) permet de façon interactive de changer la position, la rotation, la couleur, l’échelle de grandeur et le parent de l’objet sélectionné. Pour plus d’informations, se référer à \ref{fig:ui}.
+
 \subsubsection{Historique des transformations}
 \paragraph{} L'historique de transformation permet d'annuler et de récupérer une action provenant de l'utilisateur. Pour l'application, il est possible d'avoir l'historique du déplacement, de la rotation, de l'échelle et de la couleur pour chaque objet avec les touches \texttt{Ctrl+Z} et \texttt{Ctrl+Y}.
 \paragraph{} L'état d'un objet \texttt{GameObject} est sauvegardé dans une classe \texttt{Command} à chacunes de ces actions. Le nombre de sauvegarde de commande est limité à 500. Cette commande est gérée par la classe \texttt{CommandHandler} qui s'occupe de sauvegarder les états courants (\texttt{CommandHandler::add()}), d'appliquer les changements d'état (\texttt{CommandHandler::undo()/redo()}) et d'ordonner les commandes dans deux \texttt{std::stack} dont une pour récupérer les commandes et une autre pour les annuler. Cette classe appartient à la classe \texttt{Scene} qui appelle la méthode de sauvegarde d'état à chaque fonction de modification d'un \texttt{GameObject}. Elle offre aussi les méthodes \texttt{Scene::undo()} et \texttt{Scene::redo()} pour que les événements puissent contrôler l'historique des transformations.
 
 \subsection{Géométrie}
 \subsubsection{Boîte de délimitation}
+La boîte de délimitation permet de dessiner les arètes d’une boîte juste assez grande pour contenir les sommets d’un objet. Par contre, le Faucon Millénium et le « XWing » n’ont pas de boîte de délimitation car la position des sommets à l’intérieur du « mesh » est décalée par rapport au modèle 3D, ce qui dessinait la boîte très loin des objets eux-mêmes.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/delimitation.PNG}
+	\caption{Boîte de délimitation}
+	\label{fig:box}
+\end{figure}
+
 \subsubsection{Primitives géométriques}
+Les primitives géométriques offertes par cette application sont : un cube et une sphère.
+Sur la figure suivante, on peut voir tous les objets qu'il est possible de créer dans l'application, incluant les primitives géométriques.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/shapes.PNG}
+	\caption{Primitives géométriques}
+	\label{fig:primitivesgeo}
+\end{figure}
+
 \subsubsection{Modèle 3D}
+Les modèles 3D offerts par cette application sont : le \textit{Faucon Millenium} et le \textit{X-Wing Fighter}.
+Sur la figure suivante, on peut voir tous les objets qu'il est possible de créer dans l'application, incluant les modèles 3D.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/shapes.PNG}
+	\caption{Modèles 3D}
+	\label{fig:modeles3D}
+\end{figure}
 
 \subsection{Texture}
 \subsubsection{Mapping}
+Les modèles 3D du \textit{Faucon Millenium} ainsi que du \textit{X-Wing Fighter} sont texturés avec des coordonnées de mapping contenues dans leur fichier .OBJ respectif.
+Le add$-$ons \textit{ofxAssimpModel} permet de charger ces modèles et s'occupe de créer les coordonnées de textures correspondant à chaque sommet.
+Sur la figure suivante, on peut voir les deux modèles avec leur texture appliquée adéquatement.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/shapes.PNG}
+	\caption{Modèles 3D texturés}
+	\label{fig:mapping}
+\end{figure}
+
+Chaque forme 2D qu'il est possible de créer (ligne, rectangle, triangle, cercle, pentagone, flèche et étoile) possède des coordonnées de texture permettant de leur associer les textures procédurales.
+Par exemple, la figure suivante montre l'étoile texturée.
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/star.PNG}
+	\caption{Étoile texturée}
+	\label{fig:mapping2}
+\end{figure}
+
+
+
 \subsubsection{Texture procédurale}
 \paragraph{} Les textures procédurales proviennent d'un patron de base sur lequel est appliqué des algorithmes. Les patrons de bases utilisés sont le bruit de perlin, le patron en sinus et le patron en cercle.
 \paragraph{} Il est possible de générer une texture procédurale imitant l'effet nuage avec le bruit de perlin, une interpolation linéaire, un algorithme de turbulence et une modification les paramètres HSL. L'effet marbre est généré par le patron en sinus sur lequel on applique un algorithme de turbulence. L'effet bois est généré par le patron en cercle sur lequel on applique un algorithme de turbulence ainsi qu'un filtre de couleur bois (orangé / brun).
@@ -74,4 +150,3 @@ Lorsque la valeur d'une composante est modifiée dans un espace de couleur, l'au
 \caption{Textures procédurales}\label{fig-procedural-texture}
 \end{figure}
 \paragraph{} Au niveau de l'application, une classe \texttt{texelFactory} s'occupe de générer toutes les textures procédurales présentées plus-haut (\ref{fig-procedural-texture}).  Chaque textue est interfacée par une méthode permettant de transformer un buffer \texttt{ofPixels} avec des paramètres (puissance de la turbulence par exemple) qui seront utilisées par les algorithmes correspondants (réf. \ref{src-procedural-texture}). Par la suite, ce buffer est appliqué sur le \texttt{GameObject} qui possède un \texttt{ofTexture} et un \texttt{ofMesh} propre. Aussi, lors de la création du \texttt{ofMesh}, il est nécessaire de cartographier la texture sur la forme avec la méthode \texttt{ofMesh::addTextCoord} et \texttt{ofTexture::getCoordFromPercent}.
-\subsubsection{Cubemap}
