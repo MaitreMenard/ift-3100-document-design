@@ -205,3 +205,25 @@ La texture \textbf{Normal Map} sert à ajouter un effet relief grâce à la posi
 \end{figure}
 
 \subsubsection{Style libre}
+
+Le style libre est l'effet visuel cartoon en temps réel qui fait partie de la classe \texttt{fboRender}. Il s'agit d'une combinaison d'effet gérée par des \textit{shaders} qui permet d'arriver à ce résultat. \\
+
+Trois traitements principaux sont identifiés :
+\begin{itemize}
+\item \textbf{Baisse de la résolution des couleurs originales}\\
+Cette baisse de résolution se fait par le \textit{shaders/colorbits.frag} qui va la réduire à 4 valeurs pour chaque canal RGB.
+\item \textbf{Détection des lignes de contours}\\
+Cette phase applique deux traitements à l'image d'origine dont l'application du \textit{shaders/blackwhite.frag} pour obtenir l'image en noire et blanche suivi d'un détecteur de contours (Filtre de Sobel) avec \textit{shaders/edgesobel.frag}.
+\item \textbf{Combinaison des deux images}\\
+Il s'agit d'une simple multiplication entre la texture avec détection de contours et la texture à basse résolution grâce à au \textit{shaders/multiple.frag}. \\
+\end{itemize}
+
+Chacune des étapes se fait par le biais d'un objet \texttt{ofFbo} pour chaque application de \textit{shader}.
+
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=1]{img/infog-image-effet-cartoon.png}
+	\caption{Rendu de l'effet cartoon sur une scène}
+	\label{fig:cartooneffect}
+\end{figure}
