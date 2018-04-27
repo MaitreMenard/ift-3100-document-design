@@ -150,3 +150,39 @@ Par exemple, la figure suivante montre l'étoile texturée.
 \caption{Textures procédurales}\label{fig-procedural-texture}
 \end{figure}
 \paragraph{} Au niveau de l'application, une classe \texttt{texelFactory} s'occupe de générer toutes les textures procédurales présentées plus-haut (\ref{fig-procedural-texture}).  Chaque textue est interfacée par une méthode permettant de transformer un buffer \texttt{ofPixels} avec des paramètres (puissance de la turbulence par exemple) qui seront utilisées par les algorithmes correspondants (réf. \ref{src-procedural-texture}). Par la suite, ce buffer est appliqué sur le \texttt{GameObject} qui possède un \texttt{ofTexture} et un \texttt{ofMesh} propre. Aussi, lors de la création du \texttt{ofMesh}, il est nécessaire de cartographier la texture sur la forme avec la méthode \texttt{ofMesh::addTextCoord} et \texttt{ofTexture::getCoordFromPercent}.
+
+%%%%%%%%%%%%%%      TP2      %%%%%%%%%%%%
+% >> CAMÉRA
+\subsection{Caméra}
+\subsubsection{xxx}
+
+% >> ILLUMINATION
+\subsection{Illumination}
+\subsubsection{Modèle d'illumination}
+
+% >> LANCER DE RAYON
+\subsection{Lancer de rayon}
+\subsubsection{xxx}
+
+% >> TOPOLOGIE
+\subsection{Lancer de rayon}
+\subsubsection{xxx}
+
+% >> TECHNIQUE DE RENDU
+\subsection{Techniques de rendu}
+\subsubsection{Effet en pleine fenêtre}
+Les effets en pleine fenêtre sont gérés par la classe \texttt{fboRender}. Cette classe permet d'appliquer 3 types d'effet visuel dont un effet \textbf{flou gaussien}, un effet \textbf{noir et blanc} et un effet \textbf{sépia}. Il est possible de passer d'un effet à un autre avec la touche \textbf{'e'} lorsque le logiciel est lancé.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{img/infog-image-effet-plein-ecran.png}
+	\caption{Application des effets sur la scène en cours.}
+	\label{fig:effects}
+\end{figure}
+
+Chaque effet est géré par son propre shader qui se trouve dans le dossier \texttt{bin/data/shaders} qui contient les fichiers \textit{Vertex Shader} et \textit{Fragment Shader}. Le principe est de dessiner la scène dans un élément \texttt{ofFbo} pour rastériser le plan image afin d'appliquer par la suite les \texttt{shaders} appropriés. Ensuite, on dessine l'objet \texttt{ofFbo} pour afficher le résultat à l'écran.
+
+
+\subsubsection{Effet de relief}
+
+\subsubsection{Style libre}
