@@ -159,6 +159,7 @@ Par exemple, la figure suivante montre l'étoile texturée.
 % >> ILLUMINATION
 \subsection{Illumination}
 \subsubsection{Modèle d'illumination}
+\label{s:illumination}
 Les modèles d'iilumination choisi sont \textit{remplissage de couleur}, \textit{lambert}, \textit{gouraud}, \textit{phong} et \textit{blinn-phong}. Dans la scène, il est possible de passer d'un modèle d'illumination à l'autre grâce à la touche \textbf{'q'}. Ces modèles sont appliqués aux primitives avec des \textit{shaders} qui se trouvent dans le dossier \textit{bin/data/shadersRender}. Il est représenté par la classe \texttt{Render} qui se trouve à l'intérieur de la classe \texttt{Scene}. Le \textit{shader} est appliqué sur tous les \texttt{GameObject} lors de l'appel de la fonction \texttt{Scene::draw()}.
 
 \begin{figure}[H]
@@ -179,6 +180,7 @@ Les modèles d'iilumination choisi sont \textit{remplissage de couleur}, \textit
 % >> TECHNIQUE DE RENDU
 \subsection{Techniques de rendu}
 \subsubsection{Effet en pleine fenêtre}
+\label{s:effect}
 Les effets en pleine fenêtre sont gérés par la classe \texttt{fboRender}. Cette classe permet d'appliquer 3 types d'effet visuel dont un effet \textbf{flou gaussien}, un effet \textbf{noir et blanc} et un effet \textbf{sépia}. Il est possible de passer d'un effet à un autre avec la touche \textbf{'e'} lorsque le logiciel est lancé. \\
 
 Chaque effet est géré par son propre shader qui se trouve dans le dossier \texttt{bin/data/shaders} qui contient les fichiers \textit{Vertex Shader} et \textit{Fragment Shader}. Le principe est de dessiner la scène dans un élément \texttt{ofFbo} pour rastériser le plan image afin d'appliquer par la suite le \texttt{shader} approprié. Enfin, on dessine l'objet \texttt{ofFbo} pour afficher le résultat à l'écran.
@@ -192,6 +194,7 @@ Chaque effet est géré par son propre shader qui se trouve dans le dossier \tex
 
 
 \subsubsection{Effet de relief}
+\label{s:relief}
 La technique d'effet en relief choisi est un mélange entre du \textit{normal mapping} et du \textit{bump mapping} sur un mur de brique de pierre. Cet effet de relief est représenté par la classe \texttt{planeRelief} qui contient le \texttt{ofShader} qui applique les fichiers \textit{normalMap.frag/vert}, des \texttt{ofImage} pour charger la texture, la texture \textit{bump mapping} et la texture \textit{normal mapping}. Le \textit{shader} assigne les textures, la profondeur maximum et la position de la lumière qui sont ensuite appliqué sur la primitive \texttt{ofPlanePrimitive}.
 
 \begin{figure}[H]
