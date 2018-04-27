@@ -159,6 +159,14 @@ Par exemple, la figure suivante montre l'étoile texturée.
 % >> ILLUMINATION
 \subsection{Illumination}
 \subsubsection{Modèle d'illumination}
+Les modèles d'iilumination choisi sont \textit{remplissage de couleur}, \textit{lambert}, \textit{gouraud}, \textit{phong} et \textit{blinn-phong}. Dans la scène, il est possible de passer d'un modèle d'illumination à l'autre grâce à la touche \textbf{'q'}. Ces modèles sont appliqués aux primitives avec des \textit{shaders} qui se trouvent dans le dossier \textit{bin/data/shadersRender}. Il est représenté par la classe \texttt{Render} qui se trouve à l'intérieur de la classe \texttt{Scene}. Le \textit{shader} est appliqué sur tous les \texttt{GameObject} lors de l'appel de la fonction \texttt{Scene::draw()}.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.6]{img/infog-image-modele-illumination.png}
+	\caption{Rendu des modèles d'illumination}
+	\label{fig:illuminationmodel}
+\end{figure}
 
 % >> LANCER DE RAYON
 \subsection{Lancer de rayon}
