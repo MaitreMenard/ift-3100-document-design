@@ -171,7 +171,9 @@ Par exemple, la figure suivante montre l'étoile texturée.
 % >> TECHNIQUE DE RENDU
 \subsection{Techniques de rendu}
 \subsubsection{Effet en pleine fenêtre}
-Les effets en pleine fenêtre sont gérés par la classe \texttt{fboRender}. Cette classe permet d'appliquer 3 types d'effet visuel dont un effet \textbf{flou gaussien}, un effet \textbf{noir et blanc} et un effet \textbf{sépia}. Il est possible de passer d'un effet à un autre avec la touche \textbf{'e'} lorsque le logiciel est lancé.
+Les effets en pleine fenêtre sont gérés par la classe \texttt{fboRender}. Cette classe permet d'appliquer 3 types d'effet visuel dont un effet \textbf{flou gaussien}, un effet \textbf{noir et blanc} et un effet \textbf{sépia}. Il est possible de passer d'un effet à un autre avec la touche \textbf{'e'} lorsque le logiciel est lancé. \\
+
+Chaque effet est géré par son propre shader qui se trouve dans le dossier \texttt{bin/data/shaders} qui contient les fichiers \textit{Vertex Shader} et \textit{Fragment Shader}. Le principe est de dessiner la scène dans un élément \texttt{ofFbo} pour rastériser le plan image afin d'appliquer par la suite le \texttt{shader} approprié. Enfin, on dessine l'objet \texttt{ofFbo} pour afficher le résultat à l'écran.
 
 \begin{figure}[H]
     \centering
@@ -180,9 +182,26 @@ Les effets en pleine fenêtre sont gérés par la classe \texttt{fboRender}. Cet
 	\label{fig:effects}
 \end{figure}
 
-Chaque effet est géré par son propre shader qui se trouve dans le dossier \texttt{bin/data/shaders} qui contient les fichiers \textit{Vertex Shader} et \textit{Fragment Shader}. Le principe est de dessiner la scène dans un élément \texttt{ofFbo} pour rastériser le plan image afin d'appliquer par la suite les \texttt{shaders} appropriés. Ensuite, on dessine l'objet \texttt{ofFbo} pour afficher le résultat à l'écran.
-
 
 \subsubsection{Effet de relief}
+La technique d'effet en relief choisi est un mélange entre du \textit{normal mapping} et du \textit{bump mapping} sur un mur de brique de pierre. Cet effet de relief est représenté par la classe \texttt{planeRelief} qui contient le \texttt{ofShader} qui applique les fichiers \textit{normalMap.frag/vert}, des \texttt{ofImage} pour charger la texture, la texture \textit{bump mapping} et la texture \textit{normal mapping}. Le \textit{shader} assigne les textures, la profondeur maximum et la position de la lumière qui sont ensuite appliqué sur la primitive \texttt{ofPlanePrimitive}.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{img/infog-image-mur-pierre.png}
+	\caption{Fichiers textures du mur de pierre.}
+	\label{fig:wallfiles}
+\end{figure}
+
+La texture \textbf{Bump Map} sert à ajouter de la profondeur en repositionnant chaque point de la surface en fonction de la valeur de ce point sur la texture \textbf{Bump Map} avec une profondeur fixée par une variable, ce qui donne l'\textbf{Effet Bump Map} ci-dessous. \\
+
+La texture \textbf{Normal Map} sert à ajouter un effet relief grâce à la position de la lumière ambiante par rapport à la normal de la surface qui est représenté par la valeur est canaux RGB de la texture \textbf{Normal Map}. L'ombrage de chaque pixel est calculé par la suite grâce à la position de la lumière et de la normal à ce point, ce qui donne l'\textbf{Effet Normal map} ci-dessous.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.62]{img/infog-image-rendu-mur-pierre.png}
+	\caption{Rendu des effets de relief sur le mur de pierre}
+	\label{fig:wallnormalbumprender}
+\end{figure}
 
 \subsubsection{Style libre}
