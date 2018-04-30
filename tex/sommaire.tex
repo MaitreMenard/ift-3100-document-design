@@ -1,21 +1,28 @@
 \section{Sommaire}
 \label{s:sommaire}
 
-Ce programme permet de transformer plusieurs objets différents par leur position, leur rotation, leur parent et autres.
-On s’est grandement inspiré du fonctionnement de la scène du programme « Unity » pour créer cette application.\\
+Notre application permet de construire, éditer et rendre des scènes visuelles à l'aide d'une interface graphique et des raccourcis clavier.
+Elle a été développée en C++ à l'aide de la librairie \emph{openFrameworks}.
+Le programme repose sur une architecture orientée object fortement modulaire et découplée.
+Nous nous sommes grandement inspirés du fonctionnement de l'éditeur de scène du programme « Unity » pour réaliser cette application.\\
 
-Évidemment, nous pouvons voir tous les objets qui sont dans la scène en bougeant la caméra.
-Cette caméra peut bouger par translation et par rotation à l’aide de certaines touches du clavier.\\
+Il est possible d'ajouter à la scène une vaste gamme de \emph{GameObjects}, puis de modifier les propriétés de ceux-ci.
+Parmi les éléments qu'on peut créer, on retrouve des objets 3D, soient des sphères ou des cubes, et des objets 2D, tels que des cercles, des rectanles, des courbes paramétriques et autres.
+On compte aussi des objets spéciaux, comme des modèles 3D de deux célèbres vaisseaux de la série « Star Wars », deux portails inspirés du jeu « Portals » ainsi qu'un mur de briques en relief. Tous les éléments ajoutés à la scène font parti d'une structure de type graphe de scène. Cela permet à l'utilisateur de modifier la hiérarchie des objets afin de créer des relations parent-enfant.\\
 
-Premièrement, nous avons le graphe de scène, dans lequel on retrouve tous les éléments existant dans celle-ci.
-Nous avons la possibilité de créer des objets 3D (sphère et cube) ainsi qu’une variété d’objets 2D (tel qu’un cercle, un rectangle, une ligne, etc.).
-Nous pouvons également créer 2 modèles 3D, soit le fameux Faucon Millénium et un vaisseau « XWing » de la série de films « Star Wars ».\\
+L'aspect du rendu global de la scène peut être altéré par des effets pleine fenêtre.
+On peut donc rendre la scène en noir et blanc, en tons de gris, en sépia, avec un flou gaussien et avec un effet cartoon inspiré des jeux vidéo « Borderlands », en plus du mode de rendu normal.
+L'éclairage de la scène est également paramétrable et interagit avec les matériaux des objets.
+Enfin, il est possible de modifier le point de vue dans la scène et changeant le mode de projection de la caméra ou en déplaçant celle-ci.
+La caméra peut bouger par translation et par rotation à l’aide de certaines touches du clavier.\\
 
-Deuxièmement, nous avons l’inspecteur qui nous permet de modifier l’objet que nous avons sélectionné dans le graphe de scène.
-Il nous permet de jouer avec la position, la rotation, l’échelle de grandeur, leur couleur (soit en RGBA ou en HSBA) et de lui définir son parent (ses valeurs seront changées selon celles de ce dernier). \\
+L'application possède une interface graphique très complète, tout en restant intuitive.
+Différents panneaux offrent des contrôles permettant d'éditer la scène.
+Le panneau du graphe de scène présente la liste des objets qui ont été créés et permet à l'utilisateur de sélectionner un objet.
+L'inspecteur sert quant à lui à modifier l'objet qui a été sélectionné.
+Il nous permet de jouer avec différentes propriétés, dont la nature dépend du type d'objet qui est sélectionné.
+Parmi les attributs modifiables, on note la position, la rotation et l’échelle de grandeur, les propriétés du matériel, le numéro de l'objet parent et bien d'autres.
+Enfin, deux autres panneaux s'affichent en fonction du type d'objet sélectionné, le premier servant à modifier le type de lumière et le second servant à appliquer une texture générée procéduralement, choisie parmi une variété de 5 choix, à un objet 2D.\\
 
-Finalement, nous avons la fenêtre de texture, exclusive aux objets 2D.
-Celle-ci nous permet de choisir une texture, ou aucune, parmi une variété de 5 choix (par exemple, un zoom).\\
-
-Ce programme regroupe plusieurs fonctionnalités qui seront élaborées plus bas.
-Le résultat est une application à allure professionnelle avec une interface utilisateur simple d’utilisation avec des contrôles de claviers et de souris intuitifs.
+Le résultat est une application d'allure professionnelle avec une interface graphique riche et simple d’utilisation ainsi que des contrôles de claviers et de souris intuitifs, qui peut rendre des scènes intéressantes.
+Les détails sur le fonctionnement du logiciel seront élaborés dans les sections suivantes.
