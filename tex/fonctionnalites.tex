@@ -3,6 +3,7 @@
 
 \subsection{Image}
 \subsubsection{Exportation d'image}
+\label{ss:capture_ecran}
 Il est possible d'exporter des rendus de la scène dans des fichiers PNG.
 Pour ce faire, il suffit d'appuyer sur la barre espace et une capture d'écran de la fenêtre de l'application est sauvegardée dans le dossier \textit{/bin/data}.
 Le fichier image est nommé en fonction de la date et de l'heure selon le format y$-$m$-$d\_hms.png.
@@ -40,6 +41,8 @@ Chaque composante de couleur est encodée sur 8 bits, ce qui signifie que les s�
 	\label{fig:color_picker}
 \end{figure}
 Lorsque l'utilisateur entre une valeur dans un des champs, on récupère chacune des composantes et on applique cette couleurs à chaque vertex de l'objet sélectionné.
+%En dessous de ces contrôles se trouvent deux groupes de quatre champs de nombres entiers permettant de modifier la couleur de l'objet sélectionné.
+%Les quatre premiers représentent les composantes \emph{rgba} de la couleur de l'objet, alors que les quatre autres représentent les composantes \emph{hsba} de la même couleur. Chacun des champs est limité à l'intervalle de 0 à 255. Modifier une valeur dans un groupe de quatre champs modifient les valeurs dans l'autre groupe de façon simultanée.\\
 
 \subsubsection{Espace de couleur}
 Un des sélecteurs de couleur de l'inspecteur permet de travailler en espace RGBA alors que l'autre permet de travailler en espace HSBA (voir la figure \ref{fig:color_picker}).
@@ -80,9 +83,19 @@ Nous avons trois éléments d'interface graphique : l’inspecteur (pour modifie
 \subsection{Transformation}
 \subsubsection{Graphe de scène}
 Le graphe de scène est une hiérarchie qui permet d’appliquer la transformation d’un parent sur ses objets enfants. On peut sélectionner un objet sur lequel on veut appliquer une transformation et il permet également de voir tous les éléments existant dans la scène. Pour plus d’information, voir \ref{fig:ui}.
+%Le numéro d'un objet de la scène correspond à son ordre dans la liste, débutant à 1.
+%Le dernier contrôle présent dans l'inspecteur est un champ de nombre entier permettant de sélectionner le parent de l'objet sélectionné dans le graphe de scène.
+%Cette valeur doit être comprise entre 0 et le nombre d'objets dans la scène inclusivement, 0 signifiant que l'objet n'a pas de parent.
+%Un nombre supérieur à 0 représente le numéro de l'objet parent dans la liste des objets de la scène, 1 étant le premier, 2 le deuxième et ainsi de suite.
+%Un objet ne peut pas être son propre parent ni être l'enfant d'un de ses enfants.\\
 
 \subsubsection{Transformations interactives}
 L’interface utilisateur (le panneau Inspecteur) permet de façon interactive de changer la position, la rotation, la couleur, l’échelle de grandeur et le parent de l’objet sélectionné. Pour plus d’informations, se référer à \ref{fig:ui}.
+%La position est modifiée à l'aide de trois champs de textes permettant d'entrer des valeurs numériques entre -1000 et 1000 pour les composantes x, y et z.
+%Si l'utilisateur entre une valeur à l'extérieur de cette intervalle, celle-ci est ramenée à la limite la plus proche.
+%S'il entre un caractère non numérique (sauf le signe moins), alors le champ est remis à 0.
+%La rotation d'objet est modifiée à l'aide de trois glisseurs permettant de sélectionner une valeur entre -180 et 180 degrés pour chacun des angles d'Euler.
+%L'échelle est modifiée à l'aide de trois champs de textes similaires à ceux pour la position, mais limités entre -100 et 100. Les valeurs de position, de rotation et d'échelle affichées dans l'inspecteur sont dans le référentiel local de l'objet sélectionné, ce qui veut dire que s'il est enfant d'un autre objet, les valeurs affichées seront par rapport au parent et non par rapport au référentiel global de la scène.\\
 
 \subsubsection{Historique des transformations}
 \paragraph{} L'historique de transformation permet d'annuler et de récupérer une action provenant de l'utilisateur. Pour l'application, il est possible d'avoir l'historique du déplacement, de la rotation, de l'échelle et de la couleur pour chaque objet avec les touches \texttt{Ctrl+Z} et \texttt{Ctrl+Y}.
