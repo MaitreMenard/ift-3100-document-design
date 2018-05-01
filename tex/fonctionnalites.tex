@@ -167,9 +167,84 @@ Par exemple, la figure suivante montre l'étoile texturée.
 \paragraph{} Au niveau de l'application, une classe \texttt{texelFactory} s'occupe de générer toutes les textures procédurales présentées plus-haut (\ref{fig-procedural-texture}).  Chaque textue est interfacée par une méthode permettant de transformer un buffer \texttt{ofPixels} avec des paramètres (puissance de la turbulence par exemple) qui seront utilisées par les algorithmes correspondants (réf. \ref{src-procedural-texture}). Par la suite, ce buffer est appliqué sur le \texttt{GameObject} qui possède un \texttt{ofTexture} et un \texttt{ofMesh} propre. Aussi, lors de la création du \texttt{ofMesh}, il est nécessaire de cartographier la texture sur la forme avec la méthode \texttt{ofMesh::addTextCoord} et \texttt{ofTexture::getCoordFromPercent}.
 
 %%%%%%%%%%%%%%      TP2      %%%%%%%%%%%%
-% >> CAMÉRA
 \subsection{Caméra}
-\subsubsection{xxx}
+\subsubsection{Point de vue}
+\label{s:pov}
+Il est possible de déplacer la caméra afin d'avoir un point de vue différent de la scène.
+Pour ce faire, nous avons utilisé la classe \emph{ofCamera} de la librairie \emph{openFrameworks}.
+Il est donc possible de déplacer la caméra par rapport à ses axes X, Y et Z locaux au moyen des touches \textbf{w}, \textbf{a}, \textbf{s}, \textbf{d}, \textbf{+} et \textbf{-}.
+De plus, il est possible de faire tourner la caméra autour de ses axes X et Y locaux à l'aide des flèches du clavier.
+Enfin, la touche \textbf{r} permet de réinitialiser la caméra à sa pose initiale.
+Les figures \ref{fig:scenePOV1} et \ref{fig:scenePOV2} montre la même scène sous deux points de vue différents.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.25]{fig/scenePOV1.png}
+	\caption{Scène}
+	\label{fig:scenePOV1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.22]{fig/scenePOV2.png}
+	\caption{Autre point de vue de la scène}
+	\label{fig:scenePOV2}
+\end{figure}
+
+\subsubsection{Mode de projection}
+\label{s:projection}
+L'application supporte deux modes de projection de caméra: perspective et orthogonale.
+Pour alterner entre les deux, il suffit d'appuyer sur la touche \textbf{c}.
+La classe \emph{ofCamera} d'\emph{openFrameworks} permet de passer d'un mode à l'autre à l'aide d'une seule méthode.
+Cependant, dans le mode perspective, les dimensions des \emph{GameObject} sont en unités de scène, alors qu'en mode orthogonale, elles sont en pixels.
+Pour compenser, nous appliquons un facteur d'échelle global de 100x au début de chaque appel à la fonction de dessin de la scène si la caméra est en mode orthogonale.
+Les figures \ref{fig:perspective} et \ref{fig:orthogonale} montre le même point de vue d'une scène avec respectivement le mode de projection en perspective et orthogonale.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.25]{fig/scenePOV1.png}
+	\caption{Projection en perspective}
+	\label{fig:perspective}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.25]{fig/orthogonale.png}
+	\caption{Projection orthogonale}
+	\label{fig:orthogonale}
+\end{figure}
+
+
+\subsubsection{Portail}
+\label{s:portail}
+Notre application possède une classe spéciale de \emph{GameObject} qui implémente un portail inspiré du jeu \emph{Portals}.
+Ces portails sont créés en paire et il ne peut y en avoir que deux dans la scène.
+Comme dans le jeu \emph{Portals}, ce qui est affiché dans un portail correspond au point de vue de la scène à partir de l'autre portail.
+Pour réaliser cet effet, deux plans et une autre caméra, indépendante de la caméra principale, sont requis.
+
+Lorsque les portails sont mis à jour, on applique la transformation du premier portail à la caméra et on rend la scène dans un objet \emph{ofFbo}.
+On extrait ensuite l'image de ce \emph{ofFbo} et on l'applique au plan du second portail sous la forme d'une texture.
+On répète ensuite ces étapes en inversant le portail qui génère la texture et celui qui la reçoit.
+Lorsque la méthode de dessin de la scène est appelée, on rend les deux plans de la même manière qu'on rend les autres \emph{GameObject} texturés.
+La figure \ref{fig:code_portals} présente le code permettant de mettre à jour la texture des deux portails (la classe d'un portail s'appelle \emph{Mirror}, nous avons oublié de changer le nom!).
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.8]{fig/code_portals.png}
+	\caption{Code de la mise à jour des portails}
+	\label{fig:code_portals}
+\end{figure}
+
+L'image de chacun des portails change donc en temps réel et on peut y voir les autres éléments de la scène.
+La figure \ref{fig:portals} montre une scène avec les deux portails et une sphère bleue.
+La sphère se trouve devant le portail de droite et on peut la voir dans le portail de gauche.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/portals.png}
+	\caption{Scène avec les deux portails et une sphère}
+	\label{fig:portals}
+\end{figure}
 
 % >> ILLUMINATION
 \subsection{Illumination}
@@ -185,15 +260,78 @@ Par exemple, la figure suivante montre l'étoile texturée.
 %	\label{fig:illuminationmodel}
 %\end{figure}
 
+\subsubsection{Matériaux}
+\label{s:materiaux}
+
+\subsubsection{Types de lumières}
+\label{lumiere}
+
 % >> LANCER DE RAYON
 \subsection{Lancer de rayon}
-\subsubsection{xxx}
+
+Aucun critère fonctionnel n'a été réalisé dans ce module.
 
 % >> TOPOLOGIE
-\subsection{Lancer de rayon}
-\subsubsection{xxx}
+\subsection{Topologie}
+\subsubsection{Courbe cubique}
+\label{s:courbe_cubique}
+L'application offre la possibilité de créer deux types de courbes cubiques avec 4 points de contrôle, soient des courbes de Bézier ou des courbes de Hermite.
+Elles sont créées avec les touches \textbf{b} et \textbf{n} respectivement.
 
-% >> TECHNIQUE DE RENDU
+La classe abstraite \emph{Curve} implémente la gestion des points de contrôle et le dessin de la courbe, mais délègue aux classes \emph{BezierCurve} et \emph{HermiteCurve} la responsabilité d'implémenter la fonction d'interpolation.
+Les équations vues en classe ont été utilisées pour chacune des courbes.
+Les figures \ref{fig:courbe_bezier} et \ref{fig:courbe_hermite} montre respectivement les courbes de Bézier et de Hermite créées par défaut.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/bezier.png}
+	\caption{Courbe de Bézier}
+	\label{fig:courbe_bezier}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/hermite.png}
+	\caption{Courbe de Hermite}
+	\label{fig:courbe_hermite}
+\end{figure}
+
+Les points de contrôle sont des \emph{GameObjects}, ce qui permet de les afficher dans le panneau de scène et de les sélectionner.
+L'utilisateur peut donc déplacer les points de contrôle à sa guise, ce qui modifie la forme de la courbe.
+La figure \ref{fig:courbe_bezier2} montre une courbe de Bézier dont la position du deuxième point de contrôle a été modifiée.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/bezier2.png}
+	\caption{Courbe de Bézier avec un point de contrôle déplacé}
+	\label{fig:courbe_bezier2}
+\end{figure}
+
+\subsubsection{Courbe paramétrique}
+\label{s:courbe_parametrique}
+La courbe de Bézier supporte l'ajout dynamique de points de contrôle.
+En effet, nous avons utilisé l'équation polynomiale de \emph{Bernstein} (voir figure \ref{fig:code_bezier}).
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.5]{fig/code_bezier.png}
+	\caption{Équation générale de la courbe de Bézier}
+	\label{fig:code_bezier}
+\end{figure}
+
+Un bouton s'affiche dans l'inspecteur si une courbe de Bézier est sélectionnée afin de lui ajouter un nouveau point de contrôle.
+Ce nouveau point est ajouté à la fin de la liste de points de la courbe et il est placé à la position (0,0,0) dans son référentiel.
+L'utilisateur peut ensuite sélectionner ce nouveau point dans le panneau de scène et le déplacer.
+La figure \ref{fig:courbe_bezier3} montre la courbe de Bézier de base, à laquelle on a ajouté deux points de contrôle.
+
+\begin{figure}[H]
+    \centering
+	\includegraphics[scale=0.4]{fig/bezier3.png}
+	\caption{Courbe de Bézier avec 2 nouveaux point de contrôle}
+	\label{fig:courbe_bezier3}
+\end{figure}
+
+
 \subsection{Techniques de rendu}
 \subsubsection{Effet en pleine fenêtre}
 \label{s:effect}
@@ -222,7 +360,7 @@ La technique d'effet en relief choisi est un mélange entre du \textit{normal ma
 
 La texture \textbf{Bump Map} sert à ajouter de la profondeur en repositionnant chaque point de la surface en fonction de la valeur de ce point sur la texture \textbf{Bump Map} avec une profondeur fixée par une variable, ce qui donne l'\textbf{Effet Bump Map} ci-dessous. \\
 
-La texture \textbf{Normal Map} sert à ajouter un effet relief grâce à la position de la lumière ambiante par rapport à la normal de la surface qui est représenté par la valeur est canaux RGB de la texture \textbf{Normal Map}. L'ombrage de chaque pixel est calculé par la suite grâce à la position de la lumière et de la normal à ce point, ce qui donne l'\textbf{Effet Normal map} ci-dessous.
+La texture \textbf{Normal Map} sert à ajouter un effet relief grâce à la position de la lumière ambiante par rapport à la normal de la surface qui est représenté par la valeur des canaux RGB de la texture \textbf{Normal Map}. L'ombrage de chaque pixel est calculé par la suite grâce à la position de la lumière et de la normal à ce point, ce qui donne l'\textbf{Effet Normal map} ci-dessous.
 
 \begin{figure}[H]
     \centering
@@ -233,7 +371,11 @@ La texture \textbf{Normal Map} sert à ajouter un effet relief grâce à la posi
 
 \subsubsection{Style libre}
 
-Le style libre est l'effet visuel cartoon en temps réel qui fait partie de la classe \texttt{fboRender}. Il s'agit d'une combinaison d'effet gérée par des \textit{shaders} qui permet d'arriver à ce résultat. \\
+Le style libre est l'effet visuel cartoon en temps réel qui fait partie de la classe \texttt{fboRender}.
+Cet effet est inspiré du look cartoon de la série de jeux vidéo \emph{Borderlands}.
+Il s'agit d'une combinaison d'effet gérée par des \textit{shaders} qui permet d'arriver à ce résultat.
+La figure \ref{fig:cartooneffect} compare le rendu d'une scène sans effet pleine fenêtre avec le rendu de la même scène avec l'effet cartoon.
+On parcourt les différents effet pleine fenêtre en appuyant sur la touche \textbf{'e'}.\\
 
 Trois traitements principaux sont identifiés :
 \begin{itemize}
@@ -254,3 +396,4 @@ Chacune des étapes se fait par le biais d'un objet \texttt{ofFbo} pour chaque a
 	\caption{Rendu de l'effet cartoon sur une scène}
 	\label{fig:cartooneffect}
 \end{figure}
+\clearpage
