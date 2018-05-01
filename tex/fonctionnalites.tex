@@ -27,12 +27,15 @@ L'algorithme de capture d'écran est le suivant:
     \centering
 	\includegraphics[scale=0.5]{fig/screenshotducodequiprenddesscreenshots.PNG}
 	\caption{Code de la capture d'écran}
-	\label{fig:capture_ecran}
+	\label{fig:code_capture_ecran}
 \end{figure}
 
 \subsubsection{Sélecteur de couleur}
 \label{ss:selecteur_de_couleur}
-L'inspecteur offre deux sélecteurs de couleurs affichant les valeurs des composantes de couleur de l'objet sélectionné et permettant de les modifier.
+L'inspecteur peut afficher un ou plusieurs sélecteurs de couleur, en fonction du type du \emph{GameObject} qui est sélectionné.
+Si le \emph{GameObject} possède un attribut qui est une couleur, il y aura dans l'inspecteur un sélecteur qui affiche les valeurs des composantes de couleur de l'attribut et qui permet de les modifier.
+Par exemple, pour la lumière, trois sélecteurs de couleur sont affichés, pour ses couleurs diffuse, spéculaire et ambiante, alors que pour une courbe paramétrique, un seul sélecteur permet de modifier la couleur du tracé de la courbe.
+Les sélecteurs supportent les espaces RGBA et HSBA.
 Chaque composante de couleur est encodée sur 8 bits, ce qui signifie que les sélecteurs acceptent des entiers entre 0 et 255.
 \begin{figure}[H]
     \centering
@@ -40,13 +43,12 @@ Chaque composante de couleur est encodée sur 8 bits, ce qui signifie que les s�
 	\caption{Sélecteurs de couleur}
 	\label{fig:color_picker}
 \end{figure}
-Lorsque l'utilisateur entre une valeur dans un des champs, on récupère chacune des composantes et on applique cette couleurs à chaque vertex de l'objet sélectionné.
-%En dessous de ces contrôles se trouvent deux groupes de quatre champs de nombres entiers permettant de modifier la couleur de l'objet sélectionné.
-%Les quatre premiers représentent les composantes \emph{rgba} de la couleur de l'objet, alors que les quatre autres représentent les composantes \emph{hsba} de la même couleur. Chacun des champs est limité à l'intervalle de 0 à 255. Modifier une valeur dans un groupe de quatre champs modifient les valeurs dans l'autre groupe de façon simultanée.\\
+Lorsque l'utilisateur entre une valeur dans un des champs, on récupère chacune des composantes et on crée un objet \emph{ofColor} de la librairie \emph{openFrameworks}, qui est ensuite appliqué à l'attribut correspondant dans le \emph{GameObject}.
 
 \subsubsection{Espace de couleur}
-Un des sélecteurs de couleur de l'inspecteur permet de travailler en espace RGBA alors que l'autre permet de travailler en espace HSBA (voir la figure \ref{fig:color_picker}).
-Lorsque la valeur d'une composante est modifiée dans un espace de couleur, l'autre sélecteur est mis à jour afin d'afficher les valeurs correspondantes.
+Les sélecteurs de couleur de l'inspecteur permettent de travailler en espace RGBA ou en espace HSBA (voir la figure \ref{fig:color_picker}).
+Lorsque la valeur d'une composante de couleur est modifiée dans un des espaces, les valeurs du sélecteur dans l'autre espace de couleur sont mises à jour afin d'afficher les valeurs correspondantes.
+Les conversions entre les deux espaces de couleur sont gérées par la classe \emph{ofColor} de la librairie \emph{openFrameworks}.
 
 
 \subsection{Dessin vectoriel}
